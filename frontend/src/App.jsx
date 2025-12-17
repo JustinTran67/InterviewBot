@@ -2,6 +2,8 @@
 import { Routes, Route } from 'react-router-dom'
 // pages
 import HomePage from './pages/HomePage.jsx'
+import QuestionPage from './pages/QuestionPage.jsx'
+import AnalysisPage from './pages/AnalysisPage.jsx'
 
 function App() {
 
@@ -10,6 +12,8 @@ function App() {
       <div>
         <Routes>
           <Route path='/' element={<HomePage />} />
+          <Route path='/interview' element={<QuestionPage />} />
+          <Route path='/analysis' element={<AnalysisPage />} />
         </Routes>
       </div>
     </div>
