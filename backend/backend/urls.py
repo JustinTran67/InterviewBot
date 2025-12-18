@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from api.views import GenerateQuestion, AnalyzeResponse
+from api.views import GenerateQuestion, AnalyzeResponse, TextToSpeech
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/generate-questions/', GenerateQuestion.as_view(), name='generate-questions'),
     path('api/analyze-response/', AnalyzeResponse.as_view(), name='analyze-response'),
+    path('api/tts/', TextToSpeech.as_view(), name='text-to-speech'),
 ]

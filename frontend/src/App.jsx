@@ -8,7 +8,7 @@ import AnalysisPage from './pages/AnalysisPage.jsx'
 function App() {
 
   return (
-    <div className="flex items-center justify-center text-center">
+    <div className="flex flex-col items-center justify-center px-[5%] py-[10%] md:py-[5%] md:px-[20%] gap-y-2 pb-[200px] font-body">
       <div>
         <Routes>
           <Route path='/' element={<HomePage />} />

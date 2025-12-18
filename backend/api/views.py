@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.http import HttpResponse
 from rest_framework import status
 
 from openai import OpenAI
@@ -110,3 +111,21 @@ class AnalyzeResponse(APIView):
             return Response({"error": f"Analysis failed to generate: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
         return Response(data, status=status.HTTP_200_OK)
+    
+class TextToSpeech(APIView):
+    def post(self,request):
+        text = request.data.get("text", "")
+        if not text:
+            return Response({"error": "No text provided."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            response = client.audio.speech.create(
+                model="gpt-4o-mini-tts",
+                input=text,
+                voice="sage"
+            )
+
+            audio_bytes = response.read()
+            return HttpResponse(audio_bytes, content_type="audio/mpeg")
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
