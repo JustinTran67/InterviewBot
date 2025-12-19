@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     ".railway.app",
+    "interviewbot-production-5b1f.up.railway.app",
 ]
 
 
