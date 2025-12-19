@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // assets
-import interviewBot from '../assets/interviewBot.png';
+import interviewBot from '../assets/InterviewBot.png';
 
 export default function Home() {
     const [jobRole, setJobRole] = useState('');
