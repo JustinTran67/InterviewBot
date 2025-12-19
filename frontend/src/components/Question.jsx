@@ -74,23 +74,26 @@ export default function Question({ questions, jobRole }) {
     }
 
     return(
-        <div className="">
-            <div>
-                <h1 className="text-4xl font-bold mb-8 text-center">Interview Questions for <span className="text-red-600">{jobRole}</span> Role</h1>
+        <div className="flex flex-col gap-4 w-full opacity-0 animate-fade-in">
+            <div className="flex flex-col gap-2 text-center mb-4">
+                <h1 className="" >Interview Progress</h1>
+                <div>
+                    Question <span className="">{currIndex + 1}</span> of {questions.length} - <span className="text-blue font-bold">{jobRole}</span>
+                </div>
             </div>
-            <div className="flex flex-col gap-8">
+            <div className="w-full">
                 <QuestionBox question={responses[currIndex].question} value={responses[currIndex]?.answer} onChange={(e) => handleChange(currIndex, e)} />
             </div>
             <div>
-                <div className="flex flex-row justify-between mt-4">
-                    <button className="bg-gray-200 w-[100px] px-4 py-2 rounded-full" onClick={handlePrev} disabled={currIndex === 0}>Previous</button>
-                    <button className="bg-gray-200 px-4 py-2 rounded-full" onClick={goHome}>Back to Home</button>
+                <div className="flex flex-row justify-between">
+                    <button className="bg-yellow hover:bg-darkYellow transition duration-200 ease-in-out text-text w-[150px] px-4 py-2 rounded-full" onClick={handlePrev} disabled={currIndex === 0}>Previous</button>
+                    <button className="bg-yellow hover:bg-darkYellow transition duration-200 ease-in-out text-text w-[150px] px-4 py-2 rounded-full" onClick={goHome}>Home</button>
                     {currIndex === questions.length - 1 ? (
-                        <button className="bg-green-500 text-white px-4 py-2 rounded-full" onClick={handleSubmit} disabled={loading}>
+                        <button className="bg-blue hover:bg-darkBlue transition duration-200 ease-in-out text-white w-[150px] px-4 py-2 rounded-full" onClick={handleSubmit} disabled={loading}>
                             {loading ? 'Submitting...' : 'Submit'}
                         </button>
                     ) : (
-                        <button className="bg-gray-200 w-[100px] px-4 py-2 rounded-full" onClick={handleNext}>Next</button>
+                        <button className="bg-yellow hover:bg-darkYellow transition duration-200 ease-in-out w-[150px] px-4 py-2 rounded-full" onClick={handleNext}>Next</button>
                     )}
                 </div>
             </div>
@@ -101,9 +104,11 @@ export default function Question({ questions, jobRole }) {
 function QuestionBox ({ question, value, onChange}) {
     return(
         <div className="flex flex-col gap-4">
-            <PlayAudio text={question} />
-            <h3>{question}</h3>
-            <textarea className="bg-gray-200 p-4 w-full h-[300px] rounded-xl" placeholder="Type your answer here..." value={value} onChange={(e) => onChange(e.target.value)}></textarea>
+            <div className="flex flex-row gap-4 items-end">
+                <PlayAudio text={question} />
+                <h3 className="w-[200px] text-sm md:text-lg md:w-[800px]">{question}</h3>
+            </div>
+            <textarea className="bg-gray-200 p-4 w-full h-[300px] rounded-xl shadow-md" placeholder="Type your answer here..." value={value} onChange={(e) => onChange(e.target.value)}></textarea>
         </div>
     )
 }

@@ -42,21 +42,16 @@ export default function Home() {
     })
 
     return (
-        <div className="flex flex-col gap-10 text-center">
-            <div className="flex flex-row gap-4">
-                <h1 className="text-4xl font-bold">Interview Bot</h1>
-                <img src={interviewBot} alt="Interview Bot" className="w-12 h-12"/>
+        <div className="flex flex-col gap-10 items-center text-center opacity-0 animate-fade-in mb-40">
+            <div className="flex flex-row gap-4 items-center">
+                <h1 className="text-4xl font-bold font-jakarta">Interview Bot</h1>
+                <img src={interviewBot} alt="Interview Bot" className="w-12 h-12 animate-jump"/>
             </div>
             <div>
-                <select className="bg-gray-300" value={jobRole} onChange={(e) => setJobRole(e.target.value)}>
-                    <option value="" disabled>Select Job Role</option>
-                    <option value="Software Engineer Intern">Software Engineer Intern</option>
-                    <option value="Junior Software Engineer">Junior Software Engineer</option>
-                    <option value="Senior Software Engineer">Senior Software Engineer</option>
-                </select>
+                <input className="bg-gray-200 hover:bg-gray-300 transition duration-200 ease-in-out rounded-full w-[300px] md:w-[400px] px-4 py-2" value={jobRole} onChange={(e) => setJobRole(e.target.value)} placeholder="Enter Job Role e.g. Junior Software Engineer"></input>
             </div>
             <div>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-full" onClick={handleSubmit}>Start Interview</button>
+                <button className="w-[150px] bg-yellow hover:bg-darkYellow transition duration-200 ease-in-out text-text px-4 py-2 rounded-full" onClick={handleSubmit}>{loading? 'Starting...' : 'Start Interview'}</button>
             </div>
         </div>
     )

@@ -1,7 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+// assets
+import Idle from "../assets/BotIdle.png";
+import Speaking from "../assets/BotTalking.png";
+import Speaking2 from "../assets/InterviewBot.png";
 
-export default function TTSPlayer({ text }) {
+export default function PlayAudio({ text, size = "w-24 h-24" }) {
   const audioRef = useRef(null);
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
   useEffect(() => {
     if (!text) return;
@@ -24,10 +29,16 @@ export default function TTSPlayer({ text }) {
         }
         const audio = new Audio(url);
         audioRef.current = audio;
+
+        audio.onplay = () => setIsSpeaking(true);
+        audio.onended = () => setIsSpeaking(false);
+        audio.onpause = () => setIsSpeaking(false);
+
         audio.play();
 
-      } catch (err) {
-        console.error("TTS Error:", err);
+      } catch (e) {
+        console.error("TTS Error:", e);
+        setIsSpeaking(false);
       }
     };
 
@@ -40,5 +51,9 @@ export default function TTSPlayer({ text }) {
     };
   }, [text]);
 
-  return null;
+  return(
+    <div className={size}>
+      <img src={isSpeaking ? Speaking : Idle} alt="TTS Bot" className="w-full h-full" />
+    </div>
+  );
 }

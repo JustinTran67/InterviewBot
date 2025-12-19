@@ -5,7 +5,7 @@ export default function QuestionPage() {
     const location = useLocation();
     const { questions, jobRole } = location.state || {};
     return(
-        <div>
+        <div className="">
             <Question questions={questions} jobRole={jobRole} />
         </div>
     )
