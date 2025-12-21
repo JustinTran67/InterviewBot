@@ -14,6 +14,7 @@ export default function Home() {
             alert("Please select a job role.");
             return;
         }
+
         try {
             setLoading(true);
             const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
@@ -34,12 +35,18 @@ export default function Home() {
         }
     }
 
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit(e);
+        }
+    }
+
     const navigate = useNavigate();
     useEffect(() => {
         if (questions.length > 0) {
             navigate('/interview', { state: { questions, jobRole } });
         }
-    })
+    }, [questions, jobRole, navigate]);
 
     return (
         <div className="flex flex-col gap-10 items-center text-center opacity-0 animate-fade-in mb-40">
@@ -48,7 +55,7 @@ export default function Home() {
                 <img src={interviewBot} alt="Interview Bot" className="w-12 h-12 animate-jump"/>
             </div>
             <div>
-                <input className="bg-gray-200 hover:bg-gray-300 transition duration-200 ease-in-out rounded-full w-[300px] md:w-[400px] px-4 py-2" value={jobRole} onChange={(e) => setJobRole(e.target.value)} placeholder="Enter Job Role e.g. Junior Software Engineer"></input>
+                <input className="bg-gray-200 hover:bg-gray-300 transition duration-200 ease-in-out rounded-full w-[300px] md:w-[400px] px-4 py-2" value={jobRole} onChange={(e) => setJobRole(e.target.value)} onKeyDown={handleEnter} placeholder="Enter Job Role e.g. Junior Software Engineer"></input>
             </div>
             <div>
                 <button className="w-[150px] bg-yellow hover:bg-darkYellow transition duration-200 ease-in-out text-text px-4 py-2 rounded-full" onClick={handleSubmit}>{loading? 'Starting...' : 'Start Interview'}</button>
