@@ -27,6 +27,7 @@ export default function Home() {
             });
 
             const data = await response.json();
+            console.log(data);
             setQuestions(data.questions);
         } catch (e) {
             console.error("Error:", e.message);
