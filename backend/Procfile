@@ -1,1 +1,1 @@
-web: python -m gunicorn backend.wsgi:application
+web: /opt/venv/bin/gunicorn backend.wsgi:application
